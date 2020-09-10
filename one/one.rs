@@ -11,7 +11,19 @@ fn main() {
     println!("Example 3: {}", captcha("1234"));
     println!("Example 4: {}", captcha("91212129"));
 
+    // --- Part I
+    
     println!("Challenge: {}", captcha(CHALLENGE));
+
+    // --- Part II
+    
+    println!("Example 1: {}", captcha2("1212"));
+    println!("Example 2: {}", captcha2("1221"));
+    println!("Example 3: {}", captcha2("123425"));
+    println!("Example 4: {}", captcha2("123123"));
+    println!("Example 5: {}", captcha2("12131415"));
+
+    println!("Challenge: {}", captcha2(CHALLENGE));
 }
 
 fn captcha(input: &str) -> i64 {
@@ -26,6 +38,21 @@ fn captcha(input: &str) -> i64 {
     };
     total
 }
+
+fn captcha2(input: &str) -> i64 {
+    let digits = str_to_digits(input);
+    let m = digits.len() / 2;
+    let mut total: i64 = 0;
+
+    for i in 0..m {
+        if digits[i] == digits[(i+m)] {
+            total = total + digits[i];
+        };
+    };
+    2 * total
+}
+
+
 
 fn str_to_digits(s: &str) -> Vec<i64> {
     s.chars().map(char_to_digit).collect()
